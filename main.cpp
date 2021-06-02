@@ -1,113 +1,10 @@
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <stdio.h>
 
-
-using namespace std;
-
-// Function to generate a random number
-
-int random_number_generator() {
-    srand((signed)  time (0));
-    int rand_number = rand()  ;
-
-
-    return rand_number ;
-}
-
-
-// Function to get input from the user and to store them in an array
-int input_getter(int number_of_players, int level){
-
-    // Variable to store the number that will be used in our game
-    int random_number ;
-
-    // Variable to store the user input
-    int user_input ;
-
-    // Array to store the scores of every player
-    int score_array[number_of_players];
-
-    // Loop that will run 1 time for each player
-    for (int i =0 ; i < number_of_players  ; i ++ ){
-
-
-        // Statements for generating the number depending upon the level enter by the user
-        if (level == 1 ){
-
-            // %  will generate a number less than the given number
-            random_number = random_number_generator() % 20 ;
-        }
-
-        if (level == 2 ){
-            random_number = random_number_generator() % 50 ;
-        }
-
-        if (level == 3){
-            random_number = random_number_generator() % 100 ;
-
-        }
-
-        cout<<"PLAYER " << i+1  << " will play now "<<endl;
-
-
-        // Variable to store the number of turns taken by the player
-        int  no_of_guesses = 0  ;
-
-
-        // Loop for taking input from the user and to compare it with the generated number
-        do {
-            cout<<"Enter the number you want"<<endl;
-            cin>> user_input;
-            if (user_input > random_number ){
-                cout<<"Please enter a smaller number"<<endl;
-
-
-
-            }
-
-            if (user_input < random_number ){
-                cout<<"Please enter a larger number"<<endl;
-
-
-
-            }
-
-            
-
-            no_of_guesses++;
-
-
-
-
-        }
-        while (user_input != random_number);
-        score_array[i] = no_of_guesses;
-
-
-
-
-    }
-
-
-    // Variable to store the least turns
-    int least_turns = score_array[0];
-
-    // Variable to store the position of the winner player
-    int winner = 1 ;
-    for (int i =0 ; i < number_of_players ; i ++ ){
-        if (score_array[i] < least_turns){
-            least_turns = score_array[i];
-            winner = i ;
-        }
-
-        cout << "The number of turns of every player "<< i + 1   << " is "<< score_array[i]<< endl;
-
-    }
-
-    cout<<"The winner of the game is player " << winner << " with turns "<< least_turns<< endl;
-
-    return 0 ;
+// Function to count number of letters in a string
+int len (char name[]){
+    int i ;
+    for (i = 0; name[i] != '\0'; ++i);
+    return i ;
 
 
 
@@ -115,26 +12,82 @@ int input_getter(int number_of_players, int level){
 
 }
 
+// Function to convert upper case to lower case
+int lower_case(char name[]){
+    int i ;
+    for (i = 0; name[i] != '\0'; ++i){
+        if (name[i]>=65 && name[i]<=90) {
+
+            name[i] = name[i] + 32;
+        }
 
 
 
-
-
-int main () {
-
-    int number_of_players ;
-    int level ;
-    cout<<"Enter the number of players that will play the game "<<endl ;
-    cin >> number_of_players;
-    cout<<"Enter the level of the game you want to play on "<< endl;
-    cin>> level ;
-
-    input_getter(number_of_players, level);
+    }
+    printf("%s", name );
     return 0 ;
 
 
 
 
+}
+
+// Checking the vowels and words in a string
+
+int count_vowels(char name[]){
+    int i ;
+    int vowel=0;
+    for (i=0; name[i] != '\0'; i++ ){
+
+        if (name[i]=='A'|| name[i] == 'E' || name[i] == 'I' || name[i] == 'O' || name[i] == 'U' ){
+            vowel = vowel +1;
+
+        }
+    }
+    return vowel ;
+
+}
+
+// Checking whether the string is valid or not ( i.e it is contains only numbers and alphabets
+int valid_string(char name[]){
+    for (int i =0 ; name[i] !='\0' ; i++){
+        if (!(name[i]==32) && !(name[i]>=65 && name[i]<=90) && !(name[i]>=98 && name[i]<=122)){
+            return 0 ;
+        }
+
+    }
+    return 1 ;
+}
+
+// Reversing a string
+int reverse(char name[]){
+    char temp ;
+    int i =0, j =0 ;
+    for ( j =0 ; name[j]!= '\0' ; j ++ );
+
+    j = j-1;
+
+    for (i =0  ; i<j ; i ++ , j-- ){
+        temp = name[i];
+        name[i] = name[j];
+        name[j] = temp;
 
 
+    }
+    printf("%s" , name);
+    return 0;
+}
+
+
+
+
+
+
+int main() {
+    char s[] = "PROGRAMMING IS FUN";
+
+    reverse(s);
+
+
+    return 0 ;
 }
